@@ -45,13 +45,21 @@ $(document).ready(function(){
     $('.service').each(function(index) {
         $(this).css({left: index*1000-1000});
     });
-    var serviceIdx = 0;
+
+    $('.service-txt', '.service').eq(1).show();
+
     $("#service-next").click(function() {
         $(".service").each(function(){
             $(this).stop(true, true).animate({left:"-=1000"});
             var left = parseInt($(this).css('left'));
             if(left<=-1000) {$(this).animate({left: 4000}, 0)}
+            if(left==1000){
+                $(".service-txt", this).delay(400).fadeIn();
+            } else {
+                $(".service-txt", this).fadeOut();
+            }
         });
+        // left가 0인 .serivce 만 글씨(.service-txt)를 나타나게 하기
     });
 
     $("#service-prev").click(function() {
@@ -59,6 +67,11 @@ $(document).ready(function(){
             var left = parseInt($(this).css('left'));
             if(left>=4000) {$(this).stop().animate({left: -2000}, 0)}
             $(this).stop(true, true).animate({left:"+=1000"});
+            if(left==-1000){
+                $(".service-txt", this).delay(400).fadeIn();
+            } else {
+                $(".service-txt", this).fadeOut();
+            }
         });
     });
 
